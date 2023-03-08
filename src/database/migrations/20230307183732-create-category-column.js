@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.addColumn('products', 'category_id', {
-      type: Sequelize.INTERGER,
+      type: Sequelize.INTEGER,
       references: { model: 'categories', key: 'id' },
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL',

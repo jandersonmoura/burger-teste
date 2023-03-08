@@ -6,7 +6,7 @@ class ProductController {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       price: Yup.number().required(),
-      category: Yup.string().required(),
+      category_id: Yup.number().required(),
     })
     try {
       await schema.validateSync(request.body, { abortEarly: false })
@@ -15,15 +15,19 @@ class ProductController {
     }
 
     const { filename: path } = request.file
-    const { name, price, category } = request.body
+    const { name, price, category_id } = request.body
 
     const product = await Products.create({
       name,
       price,
-      category,
+      category_id,
       path,
     })
     return response.json(product)
+  }
+
+  catch(err) {
+    console.log(err)
   }
 
   async index(request, response) {
